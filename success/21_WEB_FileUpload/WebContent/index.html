@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    <title>File API Demo</title>
+	 <script type="text/javascript">
+		window.uploadAndSubmit = function () {
+			var form = document.forms["demoForm"];
+			console.log(form["file"].files.length);
+			if (form["file"].files.length == 0)
+			{
+                console.log("Please choose a file.");
+                return;
+			}
+            var file = form["file"].files[0];
+            var reader = new FileReader();
+            reader.onloadstart = function() {
+                console.log("onloadstart");
+                document.getElementById("bytesRead").textContent = '0';
+                document.getElementById("bytesTotal").textContent = file.size;
+            };
+            reader.onprogress = function(p) {
+                console.log("onprogress");
+                document.getElementById("bytesRead").textContent = p.loaded;
+            };
+            reader.onload = function() {
+                console.log("load success");
+            };
+            reader.onloadend = function() {
+                console.log('onloadend');
+                if (reader.error)
+                {
+                    console.log(reader.error);
+                    return;
+                }
+				document.getElementById("bytesRead").textContent = file.size;
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4)
+					{
+						if (xhr.status == 200)
+						{
+							console.log("upload success");
+						}
+						else
+						{
+							console.log('upload error');
+						}
+						console.log("response: " + xhr.responseText);
+					}
+				}
+                xhr.open("POST", "upload.jsp?fileName=" + file.name, true);
+                xhr.overrideMimeType("application/octet-stream");
+                xhr.send(reader.result);
+            };
+            reader.onerror = function (msg) {
+				console.log("onerror");
+				console.log(msg);
+            };
+			reader.readAsArrayBuffer(file);
+		}
+	 </script>
+</head>
+<body>
+<h1>File API Demo</h1>
+<p>
+	<form name="demoForm" id="demoForm" method="post" enctype="multipart/form-data" action="javascript:window.uploadAndSubmit();">
+		<p>Upload File: <input type="file" name="file" /></p>
+		<p><input type="submit" value="Submit"/></p>
+	</form>
+	<div>Progessing (in Bytes): <span id="bytesRead"></span> / <span id="bytesTotal"></span></div>
+</p>
+
+</body>
+</html>
