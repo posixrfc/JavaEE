@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/com.springsource.org.apache.commons.logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/spring-beans-3.2.0.RELEASE.jar" sourcepath="E:/spring-framework-3.2.0.RELEASE-dist/spring-framework-3.2.0.RELEASE/libs/spring-beans-3.2.0.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/spring-context-3.2.0.RELEASE.jar" sourcepath="E:/spring-framework-3.2.0.RELEASE-dist/spring-framework-3.2.0.RELEASE/libs/spring-context-3.2.0.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/spring-core-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/spring-expression-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="E:/resource/spring-jar/test/spring-test-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

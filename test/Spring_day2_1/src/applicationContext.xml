@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	">
+	
+	<bean id="myAdvice2" class="cn.itcast.aop.MyAdvice2"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(public void cn.itcast.aop.UserService.add(*))" id="pt2"/>	
+		<aop:aspect ref="myAdvice2">
+			<!-- <aop:before pointcut-ref="pt2" method="before"/> -->
+			<aop:after-throwing pointcut-ref="pt2" method="afterThrowing"/>
+			<aop:after-returning pointcut-ref="pt2" method="afterReturning"/>
+			<aop:after pointcut-ref="pt2" method="after"/>
+		</aop:aspect>
+		<aop:aspect ref="myAdvice2">
+			<!-- <aop:before pointcut-ref="pt2" method="before"/> -->
+			<!-- <aop:after-throwing pointcut-ref="pt2" method="afterThrowing"/> -->
+			<!-- <aop:around pointcut-ref="pt2" method="around"/> -->
+			
+		</aop:aspect>
+	</aop:config>
+	
+	<bean id="userService" class="cn.itcast.aop.UserService"></bean>
+</beans>

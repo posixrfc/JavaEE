@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn"
+	xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+	xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
+	expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+	
+  <process id="workflow" name="workflowName" isExecutable="true">
+    <startEvent id="start" name="StartName"></startEvent>
+    <userTask id="createOrder" name="createOrderName" activiti:assignee="createOrderAssignee"></userTask>
+    <userTask id="superManagerAudit" name="superManagerAuditName" activiti:assignee="superManagerAuditAssignee"></userTask>
+    <userTask id="financialAudit" name="financialAuditName" activiti:assignee="financialAuditAssignee"></userTask>
+    <endEvent id="end" name="endName"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="createOrder"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="superManagerAudit" targetRef="financialAudit"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="financialAudit" targetRef="end"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="createOrder" targetRef="superManagerAudit"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_workflow">
+    <bpmndi:BPMNPlane bpmnElement="workflow" id="BPMNPlane_workflow">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="35.0" width="35.0" x="355.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="createOrder" id="BPMNShape_createOrder">
+        <omgdc:Bounds height="55.0" width="105.0" x="320.0" y="70.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="superManagerAudit" id="BPMNShape_superManagerAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="320.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="financialAudit" id="BPMNShape_financialAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="320.0" y="230.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="BPMNShape_end">
+        <omgdc:Bounds height="35.0" width="35.0" x="355.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="372.0" y="45.0"></omgdi:waypoint>
+        <omgdi:waypoint x="372.0" y="70.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="372.0" y="205.0"></omgdi:waypoint>
+        <omgdi:waypoint x="372.0" y="230.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="372.0" y="285.0"></omgdi:waypoint>
+        <omgdi:waypoint x="372.0" y="310.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="372.0" y="125.0"></omgdi:waypoint>
+        <omgdi:waypoint x="372.0" y="150.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

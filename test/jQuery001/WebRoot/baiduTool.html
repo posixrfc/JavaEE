@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>baiduTool.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+	<script type="text/javascript">
+		
+			function loadImage(){
+				
+				
+				
+				window.setTimeout(function(){
+					
+					loadImage();
+					
+				},2000)
+			}
+		
+		  $(function(){
+		  	///定位光标
+		  	  $("#keywords").focus();
+			  
+			  //失去焦点的事件
+			  $("#keywords").blur(function(){
+			  		$(".message_area").hide();
+				
+			  })
+			  
+			  
+			  
+			  $("#keywords").keyup(function(){
+			  		var keywords=$(this).val();
+				   //一个ajax 请求道服务端，根据关键去取数据，当然你们这边可以调用百度的搜索接口，可以调用360的搜索接口...
+				   if(keywords){
+				   	
+					   $(".message_area").show();
+					
+				   }else{
+				   	
+						 $(".message_area").hide();
+				   }
+				   
+				   
+				   $(".message_area>li").mouseover(function(){
+				   		 $(".message_area>li").removeClass("baiduClass");
+						$(this).addClass("baiduClass");
+				   })
+				   
+				   $(".message_area>li").mouseout(function(){
+						$(this).removeClass("baiduClass");
+				   })
+					
+			  })
+			
+				
+		  	  $("#searchbutton").click(function(){
+			  	
+			  })
+			  
+			  
+			  //监听一下键盘..
+			  
+			 $(window).keydown(function(event){
+			 	
+			 	//在页面上面每一个按键对应到后台都是一个数字...  快捷登录...  监听上下键
+				  switch(event.keyCode) {
+				      case  40:{
+					  	 if($(".baiduClass").size()==0){
+						 	
+							  $(".message_area>li:first").addClass("baiduClass");
+							
+						 }else{
+						 	if($(".baiduClass").next().size()>0){
+								$(".baiduClass").removeClass("baiduClass").next().addClass("baiduClass");
+							}else{
+								  $(".message_area>li:first").addClass("baiduClass");
+								  $(".message_area>li:last").removeClass("baiduClass");
+							}
+							
+							
+						 }
+						   $("#keywords").val( $(".baiduClass").text());
+						 break;
+					  }
+					  case  38:{
+					  	
+						 break;
+					  }
+				  }
+				});
+		  })
+		
+		
+		
+	</script>
+	
+	<style type="text/css">
+		#keywords{
+			font-size:28px;
+			width:500px;
+		}
+		
+		.baiduClass{
+			
+			background:red;
+		}
+		
+		#searchbutton{
+			
+			font-size:28px;
+			
+		}
+		
+		.message_area{
+			width:500px;
+			border:1px solid #999999;
+			margin-left:-143px;
+			margin-top:-2px;
+			display:none;
+		}
+		
+		.message_area li{
+			list-style:none;
+			padding:5px;
+			cursor:pointer;
+		}
+	</style>
+	
+  </head>
+  
+  <body>	
+			<!--
+			 div
+			
+			 table
+			-->
+    		<div class="main" align="center">
+    			<input type="text"  id="keywords">
+				<input type="button" value="好搜一下" id="searchbutton"> 
+    			<div class="message_area" align="left">
+    					<li>平顶山</li>
+						<li>驻马店</li>
+						<li>焦作</li>
+						<li>濮阳</li>
+						<li>南阳</li>
+						<li>洛阳</li>
+						<li>许昌</li>
+						<li>商丘</li>
+						<li>周口</li>
+						<li>郑州</li>
+    			</div>
+			
+			</div>
+  </body>
+</html>

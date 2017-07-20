@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		">
+	<!-- 加载主配置文件 -->	
+	<import resource="applicationContext.xml"/>
+	
+	<!-- 子模块对应的bean-team2 -->
+	<bean id="team2" class="cn.itcast.bean.team.Team2">
+		<property name="team" ref="teambbb"></property>
+		<property name="name" value="用户模块配置中的bean"></property>
+	</bean>
+	
+</beans>

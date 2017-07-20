@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/hibernate3.jar" sourcepath="E:/hibernate-distribution-3.6.10.Final/project"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/javassist-3.12.0.GA.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/mysql-jdbc.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/resource/h3-jar/slf4j-log4j12-1.7.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

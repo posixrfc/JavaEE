@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        '-//Hibernate/Hibernate Mapping DTD 3.0//EN'
+        'http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd'>
+<hibernate-mapping>
+    <class name="cn.itcast.h3.qbc.user.UserModel" table="tbl_user">
+        <id name="uuid" >
+            <generator class="native" />
+        </id>
+		<property name="userName" />
+		<property name="age"/>
+		<property name="address"/>
+    </class>
+    <query name="getAll">from UserModel</query>
+    <sql-query name="getAll2">select * from tbl_user where uuid = ?</sql-query>
+</hibernate-mapping>

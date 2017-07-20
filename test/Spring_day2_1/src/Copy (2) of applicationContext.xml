@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	">
+	
+	<bean id="myAdvice" class="cn.itcast.aop.MyAdvice"></bean>
+	<aop:config>
+		<!-- 声明切面间共享的切入点 -->
+		<aop:pointcut expression="execution(public void cn.itcast.aop.UserService.add(*))" id="pt2"/>	
+		<aop:aspect ref="myAdvice">
+			<!-- 声明切面内共享的切入点 -->
+			<aop:pointcut expression="execution(public void cn.itcast.aop.UserService.add(*))" id="pt1"/>
+			<!-- pointcut-ref:引用公共切入点 -->
+			<aop:before pointcut-ref="pt2" method="fn"/>
+			<aop:before pointcut-ref="pt2" method="fn2"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- 定义Bean，服务于运行 -->
+	<bean id="userService" class="cn.itcast.aop.UserService"></bean>
+</beans>
+
+
+
+
+

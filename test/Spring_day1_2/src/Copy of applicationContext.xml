@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		">
+	<!-- 配置Bean,bean元素 -->
+	<!-- 构造器初始化 -->
+	<bean id="bean1" class="cn.itcast.bean.xml.Bean1">
+	</bean>
+	<!-- 静态工厂初始化 -->
+	<!-- class:静态工厂的类名 -->
+	<!-- factory-method:静态工厂中用于创建对象的方法 -->
+	<bean id="bean2" class="cn.itcast.bean.xml.Bean2StaticFactory" factory-method="getInst">
+	</bean>
+	
+	<!-- 实例工厂初始化 -->
+	<!-- 必须先创建实例工厂对应的Bean -->
+	<bean id="instFactory" class="cn.itcast.bean.xml.Bean3InstFactory"></bean>
+	<bean id="bean3" factory-bean="instFactory" factory-method="getInst">
+	</bean>
+	
+	<!-- bean的作用域 -->
+	<!-- scope:用于设置bean的作用域  默认值：singleton-->
+	<bean id="bean4" class="cn.itcast.bean.xml.Bean1" scope="prototype">
+	</bean>
+	
+	<!-- bean的生命周期控制 -->
+	<!-- init-method:指定创建Bean时对应的执行方法 -->
+	<!-- destroy-method:指定销毁Bean时对应的执行方法 -->
+	<bean id="bean5" class="cn.itcast.bean.xml.Bean1" 
+		init-method="init" 
+		destroy-method="destory"
+		scope="prototype"
+		>
+	</bean>
+	
+	<!-- 构造器注入属性 -->
+	<!-- constructor-arg:使用构造器传递参数  -->
+	<!-- value:赋值 -->
+	<bean id="bean6" class="cn.itcast.bean.xml.Bean6">
+		<constructor-arg type="java.lang.Integer" value="2014"/>
+		<constructor-arg type="java.lang.String" value="传智播客"/>
+	</bean>
+	
+	<!-- setter注入 -->
+	<!-- name:属性名 -->
+	<!-- value:简单类型的值 -->
+	<!-- ref:引用别的Bean，beanId/beanName -->
+	<bean id="bean7" class="cn.itcast.bean.xml.Bean7">
+		<property name="name" value="itcast"/>
+		<property name="age" value="8"/>
+		<property name="use" ref="abc"/>
+	</bean>
+	<!-- 为一个类注入引用类型的对象，必须将该对象设置为spring的bean -->
+	<!-- 声明bean7中使用的引用类型资源 -->
+	<bean id="abc" class="cn.itcast.bean.xml.Bean7Use"></bean>
+	
+	<!-- spring2.5提供简化格式 -->
+	<bean id="bean8" class="cn.itcast.bean.xml.Bean7"
+		p:name="itcast2"
+		p:age="2014"
+		p:use-ref="abc"
+		>
+	</bean>
+	
+	<!-- spring3.0提供简化格式 -->
+	<bean id="bean9" class="cn.itcast.bean.xml.Bean7">
+		<property name="name" value="#{'传智播客集团'}"/>
+		<property name="age" value="#{2013}"/>
+		<property name="use" value="#{abc}"/>
+	</bean>
+	
+	<!-- 集合注入 -->
+	<bean id="bean10" class="cn.itcast.bean.xml.Bean10">
+		<property name="country">
+			<list>
+				<value>中国</value>
+				<value>美国</value>
+				<value>韩国</value>
+				<value>意大利</value>
+			</list>
+		</property>
+		<property name="names">
+			<set>
+				<value>jock</value>
+				<value>jockme</value>
+				<value>zahc</value>
+				<value>pkzahc</value>
+			</set>
+		</property>
+		<property name="likes">
+			<props>
+				<prop key="BADU">百度</prop>
+				<prop key="NQ">网秦</prop>
+				<prop key="SINA">新浪</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

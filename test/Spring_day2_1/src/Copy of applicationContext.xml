@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	">
+	
+	<!-- 配置通知类为Bean -->
+	<bean id="myAdvice" class="cn.itcast.aop.MyAdvice"></bean>
+	<!-- 配置AOP -->
+	<aop:config>
+		<!-- 配置切面 -->
+		<!-- ref:对应的通知类的beanId -->
+		<aop:aspect ref="myAdvice">
+			<!-- 配置通知类别与关系(切入点与通知方法) -->
+			<!-- method:通知：共性功能 -->
+			<!-- pointcut：切入点：被挖走共性功能的方法 -->
+			<!-- aop:before:共性功能被挖走的位置 -->
+			<!-- <aop:before pointcut="execution(public void cn.itcast.aop.UserService.delete())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(void cn.itcast.aop.UserService.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* cn.itcast.aop.UserService.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* cn.*.aop.UserService.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* cn.*.*.UserService.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..UserService.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*Service.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..User*.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*r*.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.add())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.add*())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.*())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.*(*))" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.*(*,*))" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.*(int))" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.*(..))" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(* *..*.*(int,..))" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(public void cn.itcast.aop.UserService.add(int)) &amp;&amp; execution(public void cn.itcast.aop.UserService.delete())" method="fn"/> -->
+			<!-- <aop:before pointcut="execution(public void cn.itcast.aop.UserService.add(int)) || execution(public void cn.itcast.aop.UserService.delete())" method="fn"/> -->
+			<aop:before pointcut="execution(public void cn.itcast.aop.UserService.add(*)) &amp;&amp; args(int)" method="fn"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- 定义Bean，服务于运行 -->
+	<bean id="userService" class="cn.itcast.aop.UserService"></bean>
+</beans>
+
+
+
+
+
