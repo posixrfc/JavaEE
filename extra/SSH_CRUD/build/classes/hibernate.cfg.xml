@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    
+    	<property name="show_sql">true</property>
+    	<property name="format_sql">true</property>
+    	<property name="hbm2ddl.auto">update</property>
+    	<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    	
+    	<!-- 开启二级缓存功能 -->
+    	<property name="cache.use_second_level_cache">true</property>
+    	
+    	<!-- 指定二级缓存产品 -->
+    	<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+    
+    	<!-- 开启查询缓存 -->
+    	<property name="cache.use_query_cache">true</property>
+    
+    	<mapping resource="com/atguigu/crud/entity/Department.hbm.xml"/>
+    	<mapping resource="com/atguigu/crud/entity/Employee.hbm.xml"/>
+    	
+    	<!-- 针对Department类开启二级缓存功能 -->
+    	<class-cache usage="read-write" class="com.atguigu.crud.entity.Department"/>
+    	
+    </session-factory>
+</hibernate-configuration>

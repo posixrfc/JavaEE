@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<!-- 修改prepare拦截器的参数值，取消prepare()方法的默认调用 -->
+    	<interceptors>
+    		<interceptor-stack name="myStack">
+    			<interceptor-ref name="paramsPrepareParamsStack">
+    				<param name="prepare.alwaysInvokePrepare">false</param>
+    			</interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    
+    	<!-- 使用自定义拦截器栈 -->
+    	<default-interceptor-ref name="myStack"/>
+    
+    	<action name="showEmpList"
+    			class="com.atguigu.crud.component.action.CRUDAction"
+    			method="showEmpList">
+    		<result>/showEmpList.jsp</result>		
+    	</action>
+    	
+    	<action name="addUI"
+    			class="com.atguigu.crud.component.action.CRUDAction"
+    			method="addUI">
+    		<result>/addUI.jsp</result>
+    	</action>
+    	
+    	<action name="editUI"
+    			class="com.atguigu.crud.component.action.CRUDAction"
+    			method="editUI">
+    		<result>/editUI.jsp</result>
+    	</action>
+    	
+    	<action name="saveEmp"
+    			class="com.atguigu.crud.component.action.CRUDAction"
+    			method="saveEmp">
+    		<!-- 保存完毕后显示员工列表页面 -->
+    		<result type="redirectAction">showEmpList</result>		
+    	</action>
+    	
+    	<action name="removeEmp"
+    			class="com.atguigu.crud.component.action.CRUDAction"
+    			method="removeEmp">
+    		<result type="redirectAction">showEmpList</result>		
+    	</action>
+    	
+    	<action name="updateEmp"
+    			class="com.atguigu.crud.component.action.CRUDAction"
+    			method="updateEmp">
+    		<result type="redirectAction">showEmpList</result>		
+    	</action>
+
+    </package>
+
+</struts>
