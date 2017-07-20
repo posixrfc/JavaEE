@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+
+	<package name="day03_1" namespace="/" extends="struts-default">
+		<action name="upload" class="cn.itcast.action.UploadAction">
+			<result>/index.jsp</result>
+		</action>
+		<action name="upload2" class="cn.itcast.action.Upload2Action">
+			<result>/index.jsp</result>
+			<result name="input">/form2.jsp</result>
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.allowedExtensions">jpg,png</param>
+			</interceptor-ref>
+		</action>
+	</package>
+</struts>

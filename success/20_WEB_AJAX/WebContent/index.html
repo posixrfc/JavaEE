@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function(){
+		var btn01 = document.getElementById("btn01");
+		btn01.onclick = function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "/20_WEB_AJAX/AjaxServlet?t="+Math.random(), true, "un", "pwd");
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				switch(xhr.readyState){
+				case 0:
+					window.console.log("0 --> xhr对象刚刚创建");
+					break;
+				case 1:
+					window.console.log("1 --> 请求信息已经设置完毕");
+					break;
+				case 2:
+					window.console.log("2 --> 服务器已经接收到请求");
+					break;
+				case 3:
+					window.console.log("3 --> 服务器正在处理请求");
+					break;
+				case 4:
+					window.console.log("4 --> 已收到服务器的响应 status==200");
+					var div1 = document.getElementById("div1");
+					div1.innerHTML += xhr.responseText;
+					break;
+				default:
+					window.console.log("defaule --> unknow status");
+				}
+			};
+		};
+	};
+</script>
+</head>
+<body>
+	<button id="btn01">发送AJAX请求</button>
+	<div id="div1"></div>
+</body>
+</html>

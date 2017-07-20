@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    
+    	<property name="hibernate.connection.username">root</property>
+    	<property name="hibernate.connection.password">123456</property>
+    	<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+    	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    	
+    	<property name="hibernate.show_sql">true</property>
+    	<property name="hibernate.format_sql">true</property>
+    	<property name="hibernate.hbm2ddl.auto">update</property>
+    	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    	
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		
+		<!-- 配置二级缓存产品 -->
+		<!-- 从hibernate.properties属性文件中查找全类名，得到：org.hibernate.cache.internal.EhCacheRegionFactory -->
+		<!-- 但这个值不对，需要再根据简单类名在JAR包中查找，得到：org.hibernate.cache.ehcache.EhCacheRegionFactory -->
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		
+		<property name="hibernate.cache.use_query_cache">true</property>		
+		
+		<!-- 配置获取Session对象的方式为：线程 -->
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<mapping resource="com/atguigu/mapping/bean/Department.hbm.xml"/>
+    	<mapping resource="com/atguigu/mapping/bean/Employee.hbm.xml"/>
+		
+		<!-- 开启针对Department类的二级缓存功能 -->
+		<class-cache usage="read-write" class="com.atguigu.mapping.bean.Department"/>
+		
+		<!-- 为集合元素Employee开启二级缓存功能 -->
+		<class-cache usage="read-write" class="com.atguigu.mapping.bean.Employee"/>
+		
+		<!-- 为Department对象的empSet属性开启二级缓存功能 -->
+		<collection-cache usage="read-write" collection="com.atguigu.mapping.bean.Department.empSet"/>
+		
+    </session-factory>
+</hibernate-configuration>
