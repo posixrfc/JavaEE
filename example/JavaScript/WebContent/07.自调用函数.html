@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//匿名函数声明后马上调用
+	//匿名函数的自调用
+	(function () {
+		console.log("我是一个快乐的匿名函数！我也有尊严！");
+	})();
+	
+	//jQuery框架的源码总体上就是一个自调用的匿名函数
+	(function( window, undefined ) {
+		
+		//window.jQuery = window.$ = jQuery;
+		
+	})( window );
+	
+	(function(name) {
+		console.log("name="+name);
+	})("Justin");
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

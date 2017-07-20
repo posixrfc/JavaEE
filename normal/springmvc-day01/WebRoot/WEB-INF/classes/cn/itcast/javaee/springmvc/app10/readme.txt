@@ -1,0 +1,1 @@
+控制器Controller【Action继承什么类】【配置必写】HelloAction

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//通过new关键字创建对象
+	//1.new系统内置的构造器函数
+	//①new Object()
+	var obj = new Object();
+	obj.stuName = "Tom";
+	obj.showName = function(){
+		console.log("stuName="+this.stuName);
+	};
+	
+	obj.showName();
+	
+	//②new Date()
+	var date = new Date();
+	console.log(date.toLocaleString());
+	
+	//③new String()
+	var strBase = "Hello";
+	var strRef = new String("Good");
+	
+	console.log("基本数据类型的字符串："+strBase);
+	console.log("引用数据类型的字符串："+strRef);
+	
+	console.log("typeof strBase="+(typeof strBase));//string
+	console.log("typeof strRef="+(typeof strRef));//object
+	
+	console.log("strBase instanceof String:"+(strBase instanceof String));//false
+	console.log("strRef instanceof String:"+(strRef instanceof String));//true
+	
+	console.log("strBase.length="+strBase.length);
+	
+	//2.new自定义构造器函数
+	//①声明构造器函数
+	function Person(personName,age){
+		//如果一个函数作为构造器函数使用，则函数内部的this关键字，引用的就是即将要创建的对象。
+		this.personName = personName;
+		this.age = age;
+		
+		this.toString = function(){
+			return this.personName + " " + this.age;
+		};
+		
+		console.log(this);
+	}
+	
+	//②通过new构造器函数创建对象
+	var person = new Person("蜡笔小新", 4);
+	console.log(person.toString());
+	
+	//③不使用new关键字，直接调用构造器函数
+	//此时this关键字指向的是window对象
+	window.Person("野原新之助",5);
+	console.log(window.personName+"~"+window.age);
+	console.log(window.toString());
+	
+	//3.对象的constructor属性返回构造器函数的引用
+	//①对象的constructor属性
+	console.log("obj对象的构造器函数："+obj.constructor);
+	console.log("date对象的构造器函数："+date.constructor);
+	console.log("strRef对象的构造器函数："+strRef.constructor);
+	console.log("person对象的构造器函数："+person.constructor);
+	
+	//②通过构造器函数的引用创建对象
+	var person02 = new person.constructor("美芽",30);
+	console.log(person02);
+	
+	//③函数的constructor属性
+	var funConstructor = Person.constructor;
+	console.log("函数对象的构造器函数="+funConstructor);
+	
+	//系统内部创建函数对象的方式
+	var mySum = new Function("a","b","return a+b;");
+	
+	console.log("mySum(5,7)="+mySum(5,7));
+	
+	mySum = function (a,b) {
+		return a+b;
+	};
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

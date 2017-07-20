@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT 书架 (书+)>
+<!ELEMENT 书 (书名,作者,售价,出版社,分类)>
+<!ELEMENT 书名 (#PCDATA)>
+<!ELEMENT 作者 (#PCDATA)>
+<!ELEMENT 售价 (#PCDATA)>
+<!ELEMENT 出版社 EMPTY>
+<!ELEMENT 分类 (音乐|美术|历史|小说)+>
+<!ELEMENT 音乐 EMPTY>
+<!ELEMENT 美术 EMPTY>
+<!ELEMENT 历史 EMPTY>
+<!ELEMENT 小说 EMPTY>
+<!ATTLIST 出版社 
+	名称 CDATA #REQUIRED
+	成立时间 CDATA #IMPLIED
+	规模 (大|中|小) #REQUIRED
+	编号 ID #REQUIRED
+>

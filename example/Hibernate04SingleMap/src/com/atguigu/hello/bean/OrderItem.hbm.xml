@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-28 14:28:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.atguigu.hello.bean.OrderItem" table="ORDER_ITEM">
+        <id name="orderItemId" type="java.lang.Integer">
+            <column name="ORDER_ITEM_ID" />
+            <generator class="native" />
+        </id>
+        <property name="price" type="double">
+            <column name="PRICE" />
+        </property>
+        <property name="count" type="int">
+            <column name="COUNT" />
+        </property>
+        <!-- 派生属性可以不必在数据库表中建立一个字段 -->
+        <!-- 在formula属性中指定一个可以计算派生属性的值的SQL语句，Hibernate就会以子查询的方式调用这个SQL语句计算派生属性的值 -->
+        <property 
+        	name="amount" 
+        	formula="(SELECT PRICE*COUNT FROM ORDER_ITEM WHERE ORDER_ITEM.ORDER_ITEM_ID=ORDER_ITEM_ID)"/>
+    </class>
+</hibernate-mapping>

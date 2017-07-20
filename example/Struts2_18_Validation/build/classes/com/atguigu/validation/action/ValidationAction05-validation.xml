@@ -1,0 +1,28 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<!-- 表示针对age字段进行验证 -->
+	<field name="age">
+		<!-- 表示采用int验证规则 -->
+		<field-validator type="int">
+			<!-- 使用param元素给验证规则传入参数 -->
+			<!-- min表示age字段的允许的最小值 -->
+			<!-- max表示age字段的允许的最大值 -->
+			<param name="min">20</param>
+			<param name="max">50</param>
+			<!-- message元素定义验证失败后显示的错误消息 -->
+			<!-- <message>Age needs to be between ${min} and ${max}</message> -->
+			<!-- 设置当前验证消息是从国际化资源文件中读取 -->
+			<message key="atguigu.intFieldNameMsg"/>
+		</field-validator>
+	</field>
+	<field name="grade">
+		<field-validator type="int">
+			<param name="min">5</param>
+			<param name="max">10</param>
+			<message key="atguigu.intFieldNameMsg"/>
+		</field-validator>
+	</field>
+</validators>

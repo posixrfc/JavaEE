@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-28 15:15:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Order" table="ORDERS">
+        <id name="orderId" type="java.lang.Integer">
+            <column name="ORDER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="orderName" type="java.lang.String">
+            <column name="ORDER_NAME" />
+        </property>
+        
+		<!-- 使用many-to-one元素映射多对一关联关系 -->
+		<!-- name属性：当前类中用于关联另一端的属性 -->
+		<!-- class属性：指定另一端的类型 -->
+		<!-- column属性：指定在当前表中关联另一端的外键列的列名 -->
+		<many-to-one 
+			name="user" 
+			class="User" 
+			column="USER_ID_FK"/>
+    </class>
+</hibernate-mapping>

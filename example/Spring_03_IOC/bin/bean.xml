@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 实验31：通过注解分别创建Dao、Service、Controller★ -->
+	<context:component-scan base-package="com.atguigu.ioc.component"/>
+	<!-- <context:component-scan base-package="com.atguigu.ioc.component" resource-pattern="Order*.class"/> -->
+	<!-- include-filter配合use-default-filters="false"将默认的过滤规则禁用才能够实现“仅包含”效果 -->
+	<!-- <context:component-scan base-package="com.atguigu.ioc.component" use-default-filters="false">
+		annotation表示根据指定的注解全类名匹配可以包含的组件
+		<context:include-filter 
+			type="annotation" 
+			expression="org.springframework.stereotype.Controller"/>
+		assignable表示根据指定的组件全类名进行匹配，全类名的子类也可以
+		<context:include-filter 
+			type="assignable" 
+			expression="com.atguigu.ioc.component.OrderDao"/>
+	</context:component-scan> -->
+	<!-- 使用exclude-filter排除不希望进入IOC容器的组件 -->
+	<!-- <context:component-scan base-package="com.atguigu.ioc.component">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan> -->
+
+	<!-- 实验25~30：测试SpEL表达式 -->
+	<!-- 局限性：是Spring4的新特性，在更低版本中没有这个功能 -->
+	<bean id="department" class="com.atguigu.ioc.bean.Department">
+		<property name="deptName" value='#{"IT"}'/>
+		<property name="managerName" value="#{employee.empName}"/>
+	</bean>
+	
+	<bean id="employee" class="com.atguigu.ioc.bean.Employee">
+		<property name="empName" value="#{'Tom'}"/>
+		<property name="salary" value="#{2000.00}"/>
+		<property name="department" value="#{department}"/>
+		<property name="insteresting" value="#{employee.showMyHoby('swimming')}"/>
+	</bean>
+	
+	<bean id="circle" class="com.atguigu.ioc.bean.Circle">
+		<property name="length" value="#{T(java.lang.Math).PI*20}"/>
+	</bean>
+
+</beans>

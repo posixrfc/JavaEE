@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 配置自动扫描的包 -->
+	<context:component-scan base-package="com.atguigu.hibernate.componnent"/>
+
+	<!-- 导入外部属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置数据源对应的bean -->
+	<bean id="comboPooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${jdbc.userName}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="driverClass" value="${jdbc.driver}"/>
+	</bean>
+	
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 装配数据源 -->		
+		<property name="dataSource" ref="comboPooledDataSource"/>
+		<!-- 指定cfg文件的位置 -->
+		<!-- <property name="configLocation" value="classpath:hibernate.cfg.xml"/> -->
+		<!-- 配置Hibernate运行参数 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- 在Spring配置文件中不能省略“hibernate.” -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+			</props>
+		</property>
+		<!-- 配置hbm映射文件的位置 -->
+		<property name="mappingLocations" value="classpath:com/atguigu/hibernate/entity/*.hbm.xml"/>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<!-- 装配SessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 开启基于注解的声明式事务 -->
+	<tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+
+</beans>

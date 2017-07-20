@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var wuDa = {
+		name : "武大",
+		showName : function(doWhat) {
+			console.log(this.name + "和潘金莲"+doWhat);
+		}
+	};
+	
+	wuDa.showName("卖炊饼");
+
+	var xiMen = {
+		name : "西门"
+	};
+	
+	//任何一个函数都是对象，函数对象都有一个call()方法
+	//call()方法的作用是让指定的对象来调用自己
+	//参数1：要调用当前函数的那个对象
+	//参数2：方法执行时需要传入的参数
+	wuDa.showName.call(xiMen, "在马尔代夫看星星");
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//模拟jQuery框架
+	//1.编写最外层的自定义匿名函数
+	(function(window){
+		
+		//2.声明jQuery核心函数
+		var coreFun = function(coreArg) {
+			//3.判断参数的类型，执行不同的操作
+			//①判断是否是函数类型
+			if(coreArg instanceof Function) {
+				window.onload = coreArg;
+			}
+			
+			//②判断是否是字符串类型
+			if(coreArg instanceof String || (typeof coreArg) == "string") {
+				var domEle = document.getElementById(coreArg);
+				return new CoreObj(domEle);
+			}
+			
+			//③判断是否是元素（Element）类型
+			if(coreArg instanceof Element) {
+				return new CoreObj(coreArg);
+			}
+			
+		};
+		
+		//3.创建jQuery对象的构造器函数
+		function CoreObj(domEle) {
+			this.domCoreEle = domEle;
+			this.click = function(callBack){
+				this.domCoreEle.onclick = callBack;
+			};
+			this.text = function() {
+				return this.domCoreEle.innerHTML;
+			}
+		}
+		
+		window.jQuery = window.$ = coreFun;
+		
+	})(window);
+
+</script>
+<script type="text/javascript">
+
+	/* $(function(){
+		$("btnId").click(function(){
+			alert($(this).text());
+		});
+	}); */
+	
+	//alert("函数外");
+	
+	$(function(){
+		//alert("函数内");
+		//var btnEle = $("btnId");
+		//console.log(btnEle.nodeName);
+		$("btnId").click(function(){
+			//alert("AAA");
+			alert($(this).text()+"~");
+		});
+	});
+	
+</script>
+</head>
+<body>
+
+	<button id="btnId">ClickMe!</button>
+
+</body>
+</html>

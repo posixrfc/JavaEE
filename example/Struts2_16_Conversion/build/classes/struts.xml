@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+
+		<action name="Conversion01"
+				class="com.atguigu.conversion.action.ConversionAction01">
+			<result>/result.jsp</result>		
+			<result name="input">/Conversion01.jsp</result>
+		</action>
+		
+		<action name="Conversion02"
+				class="com.atguigu.conversion.action.ConversionAction02">
+			<result>/result.jsp</result>
+		</action>
+		
+		<action name="Conversion03"
+				class="com.atguigu.conversion.action.ConversionAction03">
+			<result>/result.jsp</result>
+		</action>
+		
+		<action name="Conversion04"
+				class="com.atguigu.conversion.action.ConversionAction04">
+			<result>/result.jsp</result>
+		</action>
+		
+		<action name="Conversion05"
+				class="com.atguigu.conversion.action.ConversionAction05">
+			<result>/result.jsp</result>
+		</action>
+		
+		<action name="Conversion06"
+				class="com.atguigu.conversion.action.ConversionAction06">
+			<result>/result.jsp</result>
+		</action>
+        
+    </package>
+
+</struts>

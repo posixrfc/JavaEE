@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	function Person(name,age) {
+		this.name = name;
+		this.age = age;
+	}
+	
+	//如何借助已有的Person函数简化Student函数中的重复代码？
+	function Student(name,age,subject) {
+		/* this.name = name;
+		this.age = age; */
+		//通过Person函数，替Student实现属性的赋值，实现方法：由Student对象调用Person函数
+		//Person.call(this, name,age);
+		//使用apply()可以借助arguments伪数组传入实参
+		Person.apply(this, arguments);
+		this.subject = subject;
+	}
+	
+	//为了让“子类”对象是“父类”构造器函数的实例，需要让“子类”构造器函数的原型对象指向“父类”构造器函数的原型对象
+	Student.prototype = Person.prototype;
+	
+	var person = new Person("Justin~", 20);
+	var student = new Student("Kate~", 25,"Android");
+	
+	console.log(person);
+	console.log(student);
+	
+	console.log("student instanceof Person:"+(student instanceof Person));//true
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

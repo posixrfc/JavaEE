@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	var a = 10;
+	console.log("a="+a);
+
+	//在script标签中直接声明的变量和函数都默认作为window对象的属性和方法
+	console.log("window.a="+window.a);
+	
+	function showName() {
+		return "Tom";
+	}
+	
+	console.log("通过window对象调用showName()方法："+window.showName());
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

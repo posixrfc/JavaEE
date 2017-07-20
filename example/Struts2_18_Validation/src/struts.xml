@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- 指定国际化资源文件的基名 -->
+    <constant name="struts.custom.i18n.resources" value="MyI18N"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+		<action name="test01"
+				class="com.atguigu.validation.action.ValidationAction01">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test01.jsp</result>
+		</action>
+		
+		<action name="test02"
+				class="com.atguigu.validation.action.ValidationAction02">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test02.jsp</result>
+		</action>
+		
+		<action name="test03"
+				class="com.atguigu.validation.action.ValidationAction03">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test03.jsp</result>
+		</action>
+		
+		<action name="test04"
+				class="com.atguigu.validation.action.ValidationAction04">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test04.jsp</result>
+		</action>
+		
+		<action name="test05"
+				class="com.atguigu.validation.action.ValidationAction05">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test05.jsp</result>
+		</action>
+		
+		<action name="test06"
+				class="com.atguigu.validation.action.ValidationAction06">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test06.jsp</result>
+		</action>
+		
+		<action name="special"
+				class="com.atguigu.validation.action.ValidationAction05"
+				method="specialMethod">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test07.jsp</result>
+		</action>
+        
+		<action name="test08"
+				class="com.atguigu.validation.action.ValidationAction08">
+			<result>/success.jsp</result>
+			<!-- 配置验证失败后要执行的结果 -->
+			<result name="input">/test08.jsp</result>
+		</action>
+    </package>
+
+</struts>

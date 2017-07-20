@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-4-25 20:44:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.mapping.bean">
+    <class name="Employee" table="EMPS">
+    
+        <id name="empId" type="java.lang.Integer">
+            <column name="EMP_ID" />
+            <generator class="native" />
+        </id>
+        <property name="empName" type="java.lang.String">
+            <column name="emp_name" />
+        </property>
+        <property name="salary" type="double">
+            <column name="SALARY" />
+        </property>
+        <property name="birthday" type="timestamp">
+            <column name="birthday" />
+        </property>
+        <property name="telephone" type="java.lang.String">
+            <column name="TELEPHONE" />
+        </property>
+        <many-to-one name="department" class="Department">
+            <column name="dept_id_fk" />
+        </many-to-one>
+    </class>
+    
+    <!-- 声明一个HQL查询语句 -->
+    <query name="myHQLQuery">
+    	<![CDATA[From Employee e Where e.empName=:nameParam]]>
+    </query>
+    
+</hibernate-mapping>

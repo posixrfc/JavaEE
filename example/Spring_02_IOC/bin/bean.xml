@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<!-- 实验24：基于XML的自动装配 -->
+	<bean id="userDao3" class="com.atguigu.ioc.component.UserDao"/>
+	<bean id="userDao2" class="com.atguigu.ioc.component.UserDao"/>
+	<!-- autowire="byType"根据类型装配要求目标类型的bean是唯一的 -->
+	<!-- autowire="byName"根据setXxx()方法定义的属性字符串查找对应id值的bean -->
+	<bean id="userService" autowire="byName" class="com.atguigu.ioc.component.UserService"/>
+	<bean id="userAction" autowire="byName" class="com.atguigu.ioc.component.UserAction"/>
+	<!-- 手动装配 -->
+	<!-- <bean id="userDao" class="com.atguigu.ioc.component.UserDao"/>
+	<bean id="userService" class="com.atguigu.ioc.component.UserService">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	<bean id="userAction" class="com.atguigu.ioc.component.UserAction">
+		<property name="userService" ref="userService"/>
+	</bean> -->
+	
+	<!-- 实验23：引用外部属性文件★ -->
+	<!-- 导入外部属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- <property name="user" value="root"/>
+		<property name="password" value="root"/>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"/>
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/> -->
+		<!-- 使用${}格式引用属性文件中的键值对 -->
+		<!-- 属性文件中的键最好加前缀，避免冲突 -->
+		<property name="user" value="${jdbc.user}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="driverClass" value="${jdbc.driver}"/>
+	</bean>
+	
+	<!-- 实验22[补充]：测试bean的后置处理器 -->
+	<bean id="myBeanProcess" class="com.atguigu.ioc.process.MyBeanProcess"/>
+	
+	<!-- 实验22：创建带有生命周期方法的bean -->
+	<bean id="myServlet" 
+		  class="com.atguigu.ioc.bean.MyServlet" 
+		  init-method="myInit"
+		  destroy-method="myDestroy"/>
+	
+	<!-- 实验21：测试bean的作用域，分别创建单实例和多实例的bean★ -->
+	<!-- Spring的IOC容器默认按照单实例的方式创建bean的实例对象 -->
+	<!-- 使用scope="prototype"设置当前bean按照多实例方式创建对象 -->
+	<!-- 设置为多实例创建后，对象的创建就会变成在获取实例时创建 -->
+	<bean id="struts2Action" class="com.atguigu.ioc.bean.Struts2Action" scope="prototype"/>
+	
+	<!-- 实验20：bean之间的依赖 -->
+	<!-- 默认情况下，IOC容器创建对象的顺序是按照配置文件中配置的顺序创建 -->
+	<!-- 设置依赖后，被依赖的bean会先创建对象 -->
+	<bean id="department" class="com.atguigu.ioc.bean.Department" depends-on="employee"/>
+	<bean id="employee" class="com.atguigu.ioc.bean.Employee"/>
+	
+	<!-- 实验19：通过abstract属性创建一个模板bean -->
+	<!-- 模板的bean配置不能创建实例，就是专门用于继承使用的 -->
+	<bean id="templateBook" class="com.atguigu.ioc.bean.Book" abstract="true">
+		<property name="bookName" value="bookNameValue"/>
+		<property name="author" value="authorValue"/>
+		<property name="isbn" value="isbnValue"/>
+		<property name="price" value="100"/>
+	</bean>
+	
+	<bean id="templateSub" parent="templateBook"/>
+	
+	<!-- 实验18：通过继承实现bean配置信息的重用 -->
+	<bean id="parentBook" class="com.atguigu.ioc.bean.Book">
+		<property name="bookName" value="bookNameValue"/>
+		<property name="author" value="authorValue"/>
+		<property name="isbn" value="isbnValue"/>
+		<property name="price" value="100"/>
+	</bean>
+	
+	<!-- 为了减少重复的配置信息，使用继承机制 -->
+	<bean id="subBook" parent="parentBook">
+		<property name="bookName" value="subBookName"/>
+	</bean>
+
+	<!-- 实验17：配置FactoryBean★ -->
+	<bean id="myFactoryBeanBook" class="com.atguigu.ioc.factory.MyFactoryBean">
+		<!-- 给FactoryBean实现类传入参数 -->
+		<property name="propertyParam" value="MyParamValue"/>
+	</bean>
+
+	<!-- 实验16：配置通过实例工厂方法创建的bean -->
+	<!-- 1.配置实例工厂本身的bean -->
+	<bean id="instanceFactory" class="com.atguigu.ioc.factory.InstanceFactory"/>
+	
+	<!-- 2.配置使用实例工厂创建的bean -->
+	<!-- factory-bean属性：指定实例工厂bean的id -->
+	<bean id="book16" factory-bean="instanceFactory" factory-method="getBook">
+		<constructor-arg value="key02"/>
+	</bean>
+
+	<!-- 实验15：配置通过静态工厂方法创建的bean -->
+	<!-- class属性：指定工厂类的全类名 -->
+	<!-- id属性：指定的是Book对象的引用名称 -->
+	<!-- factory-method属性：用于指定静态工厂类中用于获取Book对象的静态方法的方法名 -->
+	<bean id="book15" class="com.atguigu.ioc.factory.StaticFactory" factory-method="getBook">
+		<!-- 为静态方法传入参数 -->
+		<constructor-arg value="key01"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//函数调用：函数引用+()
+	function showName() {
+		console.log("我是一个快乐的Tom！");
+	}
+	
+	//通过函数名引用函数
+	showName();
+	
+	//通过其他变量引用函数
+	var otherRef = showName;
+	otherRef();
+	
+	var obj = new Object();
+	obj.showObjName = showName;
+	
+	//通过对象的属性引用函数
+	obj.showObjName();
+	
+	var arr = ['Hello',20,true,showName];
+	
+	//通过数组元素引用函数
+	arr[3]();
+	
+	var student = new Object();
+	student.myName = ['Hello',20,true,function(){
+		return showName;
+	}];
+	
+	//函数的返回值是另一个函数的引用
+	student.myName[3]()();
+	
+	//$("#id")[0]
+	
+	//形参个数：函数名.length
+	function sum(a,b){
+		console.log("a+b="+(a+b));
+	}
+	
+	//JavaScript函数执行时不检查实参的个数和类型
+	sum(1,2);
+	sum(1,2,3);
+	sum(1);
+	sum("Hello", " Tom");
+	
+	console.log("sum函数声明的形参个数为："+sum.length);
+	
+	//实参数组：函数内部的arguments对象
+	function sumSuper() {
+		//arguments对象可以当做数组使用
+		var count = 0;
+		
+		for(var i = 0; i < arguments.length; i++) {
+			count += arguments[i];
+		}
+		
+		console.log("任意个数的和是="+count);
+	}
+	
+	sumSuper(1,2);
+	sumSuper(1,2,3);
+	sumSuper(1,2,3,4);
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

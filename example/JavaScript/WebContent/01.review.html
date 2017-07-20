@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 在HTML页面中，可以将JavaScript代码写在script标签内 -->
+<script type="text/javascript">
+
+	//alert("在文档加载完成之前");
+
+	//点击按钮弹出文本值
+	//1.借助window.onload事件，在整个文档加载完成之后，执行操作
+	//本质：给window对象绑定onload事件响应函数
+	window.onload = function(){
+		//alert("在文档加载完成之后");
+		//2.获取按钮对象对应的元素节点对象
+		//节点、文档、元素、文本、属性
+		var btnEleArr = document.getElementsByTagName("button");
+		var btnEle = btnEleArr[0];
+		//alert(btnEle);
+		
+		//3.绑定单击响应函数
+		//区分函数的声明和调用，声明不等于调用，事件响应函数只有在触发指定的事件之后才会执行
+		btnEle.onclick = function(){
+			
+			//alert("哇塞，我被点击了！");
+			//4.弹出文本值
+			//使用this关键字引用button按钮对象→在函数中this关键字引用的就是调用当前函数的那个对象
+			//alert(this);
+			alert(this.innerHTML);
+			
+			console.log("在控制台输出数据……");
+		};
+		
+		//btnEle.onclick();
+	};
+
+</script>
+</head>
+<body>
+
+	<button>ClickMe!</button>
+
+</body>
+</html>

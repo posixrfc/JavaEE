@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    
+		<!-- 1.连接数据库的基本信息 -->
+		<!-- ①数据库用户名 -->
+		<property name="hibernate.connection.username">root</property>
+		
+		<!-- ②数据库密码 -->
+		<property name="hibernate.connection.password">root</property>
+		
+		<!-- ③数据库URL地址 -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate0607</property>
+		
+		<!-- ④数据库驱动全类名 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		
+		<!-- 2.Hibernate运行过程中相关信息 -->
+		<!-- ①Hibernate程序运行时是否打印自动生成的SQL语句 -->
+		<!-- 在项目开发阶段开启，项目上线后关闭 -->
+		<property name="hibernate.show_sql">true</property>
+		
+		<!-- ②是否将Hibernate打印的SQL语句进行格式化 -->
+		<property name="hibernate.format_sql">true</property>
+		
+		<!-- ③生成数据库表的策略 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- ④指定数据库方言 -->
+		<!-- 方言：同一个事物在不同地区有不同称谓 -->
+		<!-- 数据库方言：同一个操作在不同数据库中SQL语句不一样 -->
+		<!-- 具体数据库方言的取值参见hibernate-release-4.2.4.Final\project\etc\hibernate.properties -->
+		<!-- 以MySQL为例 -->
+		<!-- MySQL版本低于5.5的使用：org.hibernate.dialect.MySQLInnoDBDialect -->
+		<!-- MySQL版本大于等于5.5的使用：org.hibernate.dialect.MySQL5InnoDBDialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<!-- 3.hbm映射文件的位置 -->
+		<!-- 以src目录为基准的相对路径 -->
+		<mapping resource="com/atguigu/hello/bean/Student.hbm.xml"/>
+		
+    </session-factory>
+</hibernate-configuration>

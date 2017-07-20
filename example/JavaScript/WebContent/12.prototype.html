@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	function Person(name,age) {
+		this.name = name;
+		this.age = age;
+		this.showName = function(){
+			return this.name;
+		};
+		//this.subject = "JavaWeb";
+	}
+	
+	var person01 = new Person("tom01", 20);
+	var person02 = new Person("tom02", 20);
+	
+	//手动为每一个对象临时添加属性，这样做可以实现，但太繁琐
+	//person01.subject = "JavaWeb~";
+	//person02.subject = "JavaWeb~";
+	
+	//可以通过修改对象的“原型对象”，一劳永逸的添加属性
+	Person.prototype.subject = "JavaWeb@~~";
+	
+	//提出问题：如何为Person的每一个对象统一添加属性
+	console.log(person01.subject);
+	console.log(person02.subject);
+	
+	console.log(person01);
+	console.log(person02);
+	
+	//函数的prototype属性和对象的__proto__属性指向同一个对象，这个对象就是所谓对象的原型
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

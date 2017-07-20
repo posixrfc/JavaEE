@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-31 10:33:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Boy" table="BOYS">
+        <id name="boyId" type="java.lang.Integer">
+            <column name="BOY_ID" />
+            <!-- 自己生成主键 -->
+            <generator class="native" />
+        </id>
+        <property name="boyName" type="java.lang.String">
+            <column name="BOY_NAME" />
+        </property>
+		<!-- 没有特殊设置 -->
+		<one-to-one name="girl" class="Girl"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+视图解析器【解析视图逻辑名对应的真实路径】【配置可省】InternalResourceViewResolver

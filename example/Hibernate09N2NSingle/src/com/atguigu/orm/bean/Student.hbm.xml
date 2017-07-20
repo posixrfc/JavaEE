@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-31 14:39:41 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Student" table="STUDENT">
+        <id name="studentId" type="java.lang.Integer">
+            <column name="STUDENT_ID" />
+            <generator class="native" />
+        </id>
+        <property name="studentName" type="java.lang.String">
+            <column name="STUDENT_NAME" />
+        </property>
+        <!-- 映射多对多关联关系 -->
+        <!-- name属性：用于指定当前类中关联另一端的属性名 -->
+        <!-- table属性：用于指定中间表的表名 -->
+        <set name="teacherSet" table="INNER_TABLE">
+            <key>
+            	<!-- 指定当前表在中间表中的外键列的列名 -->
+                <column name="STU_FK" />
+            </key>
+            <!-- 使用many-to-many映射多对多关联关系 -->
+            <!-- class属性：指定另一端类型 -->
+            <!-- column属性：指定对方表在中间表中的外键列列名 -->
+            <many-to-many class="Teacher" column="TEACHER_FK" />
+        </set>
+    </class>
+</hibernate-mapping>

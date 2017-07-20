@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-31 15:14:11 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Teacher" table="TEACHER">
+        <id name="teacherId" type="java.lang.Integer">
+            <column name="TEACHER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="teacherName" type="java.lang.String">
+            <column name="TEACHER_NAME" />
+        </property>
+        <set name="studentSet" table="INNER_TABLE">
+            <key>
+                <column name="TEACHER_FK" />
+            </key>
+            <many-to-many class="Student" column="STU_FK" />
+        </set>
+    </class>
+</hibernate-mapping>

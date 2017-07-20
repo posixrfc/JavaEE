@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//1.声明在函数中的变量仅在这个函数中有效
+	function showName() {
+		var stuName = "Jerry";
+		return stuName;
+	}
+	
+	console.log("showName():"+showName());
+	
+	//console.log("在函数外部访问局部变量："+stuName);//Uncaught ReferenceError: stuName is not defined
+	
+	//2.在函数中声明变量如果没有使用var关键字，它将作为window对象的属性成为全局变量
+	function showNameGlobal() {
+		stuNameGlobal = "Kate";
+		return stuNameGlobal;
+	}
+	
+	console.log("showNameGlobal():"+showNameGlobal());
+	
+	console.log("在函数外部访问函数内部声明的全局变量："+stuNameGlobal);
+	
+	goodName = "Bob";
+	
+	console.log("goodName="+goodName);
+	
+	var age;
+	
+	console.log("age="+age);
+	
+	console.log("notExist="+notExist);
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

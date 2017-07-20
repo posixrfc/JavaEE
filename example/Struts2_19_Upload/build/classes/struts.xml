@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+	<!-- 修改默认的请求总大小 -->
+	<constant name="struts.multipart.maxSize" value="1048576" />
+	<constant name="struts.custom.i18n.resources" value="MyI18N"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+    
+		<!-- 设置拦截器参数 -->
+		<interceptors>
+			<!-- 创建自定义拦截器栈 -->
+			<interceptor-stack name="myUploadStack">
+				<!-- 引用默认拦截器栈 -->
+				<interceptor-ref name="defaultStack">
+					<!-- 设置某一个拦截器的参数 -->
+					<!-- 将单个文件大小限制为100K -->
+					<param name="fileUpload.maximumSize">102400</param>
+					<!-- 设置允许的内容类型，多个值之间使用,分开 -->
+					<param name="fileUpload.allowedTypes">image/jpeg,image/gif,image/png,image/jpg</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 自定义拦截器栈创建后必须要引用，否则还是使用默认拦截器栈 -->
+		<default-interceptor-ref name="myUploadStack"/>
+
+		<action name="singleUpload"
+				class="com.atguigu.upload.action.SingleUploadAction">
+			<result>/result.jsp</result>		
+		</action>
+		
+		<action name="multiUpload"
+				class="com.atguigu.upload.action.MultiUploadAction">
+			<result>/result.jsp</result>		
+		</action>
+		
+		<action name="multiListUpload"
+				class="com.atguigu.upload.action.MultiListUploadAction">
+			<result>/result.jsp</result>
+			<result name="input">/multiUploadList.jsp</result>		
+		</action>
+        
+    </package>
+
+</struts>

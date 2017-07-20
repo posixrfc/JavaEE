@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//1.在script标签中，window对象可以直接使用
+	console.log(window);
+	
+	//2.调用window对象的属性和方法可以省略“window.”
+	window.console.log("完整的调用方法：window.console.log");
+	console.log("简化的调用方法：console.log");
+	
+	//alert();
+	//confirm();
+	//isNaN();
+	//NaN
+	//...
+	
+	//3.在script标签中，可以通过this关键字引用window对象
+	console.log("this="+this);
+	console.log(this == window);
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

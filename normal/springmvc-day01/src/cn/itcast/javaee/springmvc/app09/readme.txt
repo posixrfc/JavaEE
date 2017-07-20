@@ -1,0 +1,1 @@
+适配器Adapter【Action实现什么接口】【配置可省】SimpleControllerHandlerAdapter

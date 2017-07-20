@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<!-- class属性值可以使用IOC容器中Action类bean的ID -->
+    	<action name="springAction" class="bookAction" method="showMessage">
+    	
+    		<result>/result.jsp</result>
+    	
+    	</action>
+
+    </package>
+
+</struts>

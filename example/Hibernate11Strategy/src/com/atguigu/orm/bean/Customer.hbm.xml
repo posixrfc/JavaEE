@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-28 16:37:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Customer" table="CUSTOMERS" batch-size="2">
+        <id name="customerId" type="java.lang.Integer">
+            <column name="CUSTOMER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="customerName" type="java.lang.String">
+            <column name="CUSTOMER_NAME" />
+        </property>
+        
+		<!-- 使用set元素映射一对多关联关系 -->
+		<!-- name属性：指定当前类中的集合属性 -->
+		<!-- table属性：指定另一端的数据库表表名 -->
+		<!-- inverse属性：设置为true时表示让对方维护关联关系，而自己这一端放弃 -->
+		<!-- cascade属性：设置级联操作方式。取值为delete时表示级联删除，取值为save-update时表示级联保存和更新，取值为all时表示级联删除和保存更新都有效 -->
+		<!-- order-by属性：设置排序列以及排序方式，格式列名 ASC/DESC，其中排序方式可以省略，省略后默认是升序 -->
+		<set name="orders" 
+			table="ORDERS"
+			lazy="true"
+			batch-size="3">
+		    <key>
+		    	<!-- 指定另一端表中关联当前表的外键列的列名 -->
+		        <column name="CUSTOMER_FK" />
+		    </key>
+		    <!-- 用于指定另一端的类型 -->
+		    <one-to-many class="Order" />
+		</set>
+    </class>
+</hibernate-mapping>

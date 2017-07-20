@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-7 9:39:19 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.crud.entity">
+    <class name="Department" table="DEPTS">
+        <id name="deptId" type="java.lang.Integer">
+            <column name="DEPT_ID" />
+            <generator class="native" />
+        </id>
+        <property name="deptName" type="java.lang.String">
+            <column name="DEPT_NAME" />
+        </property>
+        <set name="empSet" table="EMPS" inverse="true">
+            <key>
+            	<!-- 在EMPS表中关联DEPTS表的外键列的列名 -->
+                <column name="DEPT_FK" />
+            </key>
+            <one-to-many class="Employee" />
+        </set>
+    </class>
+</hibernate-mapping>

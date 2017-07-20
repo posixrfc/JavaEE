@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-31 10:10:32 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Boy" table="BOYS">
+        <id name="boyId" type="java.lang.Integer">
+            <column name="BOY_ID" />
+            <generator class="native" />
+        </id>
+        <property name="boyName" type="java.lang.String">
+            <column name="BOY_NAME" />
+        </property>
+        
+		<!-- 映射“一对一”关联关系 -->
+		<!-- property-ref属性：当顺着Boy.girl属性找到Girl类后，使用Girl.boy属性建立关联关系 -->
+		<!-- 如果没有指定property-ref则查询Boy对象时的连接条件将不正确 -->
+		<one-to-one name="girl" class="Girl" property-ref="boy"/>
+    </class>
+</hibernate-mapping>

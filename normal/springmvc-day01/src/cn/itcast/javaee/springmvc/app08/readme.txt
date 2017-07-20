@@ -1,0 +1,1 @@
+映射器Mapping【什么样的请求交给Action】【配置可省】BeanNameUrlHandlerMapping

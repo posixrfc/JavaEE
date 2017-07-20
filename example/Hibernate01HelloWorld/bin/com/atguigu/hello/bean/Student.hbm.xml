@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-27 10:29:51 by Hibernate Tools 3.4.0.CR1 -->
+<!-- 根标签表示这是一个Hibernate映射文件 -->
+<hibernate-mapping>
+	<!-- class标签用于指定当前持久化类 -->
+	<!-- name属性指定持久化类的全类名 -->
+	<!-- table属性指定生成数据库表的表名 -->
+    <class name="com.atguigu.hello.bean.Student" table="STUDENTS">
+    	<!-- id标签用于指定OID和数据库表主键之间的关系 -->
+    	<!-- name属性指定了OID的属性名 -->
+    	<!-- type属性指定OID属性的类型，作用是映射到数据库表中的类型 -->
+        <id name="stuId" type="java.lang.Integer">
+        	<!-- column子标签指定要生成的数据库表的主键列的列名 -->
+            <column name="STU_ID" />
+            <!-- ★generator子标签用于指定生成主键的策略 -->
+            <!-- 默认值assigned表示主键的值由程序员提供，Hibernate和底层数据库都不管 -->
+            <!-- 建议取值：native即采用数据库本地支持的方式生成主键 -->
+            <generator class="native" />
+        </id>
+        
+        <!-- 映射其他的普通属性 -->
+        <!-- name属性指定属性名 -->
+        <!-- type属性指定属性的类型 -->
+        <property name="stuName" type="java.lang.String">
+        	<!-- 指定列名 -->
+            <column name="STU_NAME" />
+        </property>
+        <property name="age" type="int">
+            <column name="AGE" />
+        </property>
+        <property name="birthday" type="java.util.Date">
+            <column name="BIRTHDAY" />
+        </property>
+    </class>
+</hibernate-mapping>

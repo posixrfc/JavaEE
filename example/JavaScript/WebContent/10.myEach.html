@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	/*
+	$("button").each(function(){
+		//使用this关键字引用遍历过程中得到的每一个button对象
+		//说明当前回调函数是由每一个button对象分别调用的
+		alert(this.innerHTML);
+	});
+	*/
+	window.onload = function(){
+		
+		var btnEles = document.getElementsByTagName("button");
+		
+		myEach(btnEles, function() {
+			console.log("按钮中的文本值是："+this.innerHTML);
+		});
+		
+	};
+	
+	//自定义可以遍历数组的函数
+	//arrObj：表示要遍历的数组
+	//callBack：表示遍历过程中如何处理得到的每一个数组元素
+	function myEach(arrObj, callBack) {
+		
+		for(var i = 0; i < arrObj.length; i++) {
+			
+			//动态的由每一个数组元素执行callBack回调函数
+			callBack.call(arrObj[i]);
+			
+		}
+		
+	}
+
+</script>
+</head>
+<body>
+
+	<button>Btn01</button>
+	<button>Btn02</button>
+	<button>Btn03</button>
+	<button>Btn04</button>
+	<button>Btn05</button>
+
+</body>
+</html>

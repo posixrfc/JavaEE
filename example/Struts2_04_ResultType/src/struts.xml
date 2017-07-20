@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- 转发到result.jsp -->
+		<action name="resultType_dispatcher">
+			<!-- 使用type属性指定前往目标资源的方式，默认值是：dispatcher -->
+			<result type="dispatcher">/result.jsp</result>
+		</action>
+
+		<!-- 重定向到result.jsp -->
+		<action name="resultType_redirect">
+			<result type="redirect">/result.jsp</result>
+		</action>
+
+		<!-- 重定向到目标Action -->
+		<action name="resultType_redirectToAction">
+			<result type="redirectAction">
+				<!-- 目标Action的名字 -->
+				<param name="actionName">targetAction</param>
+				<!-- 目标Action所属的namespace属性值 -->
+				<!-- 如果目标Action所属的namespace属性是默认值“/”则可以省略 -->
+				<param name="namespace">/atguigu</param>
+			</result>
+		</action>
+
+		<!-- 直接重定向到目标Action -->
+		<action name="resultType_redirectDirect">
+
+			<result type="redirect">/atguigu/targetAction.action</result>
+
+		</action>
+
+		<!-- 转发到目标Action -->
+		<action name="resultType_dispatcherToAction">
+
+			<!-- 以转发到URL地址的方式转发到目标Action无法实现 -->
+			<!-- <result type="dispatcher">/atguigu/targetAction.action</result> -->
+			<result type="chain">
+				<!-- 目标Action的名字 -->
+				<param name="actionName">targetAction</param>
+				<!-- 目标Action所属的namespace属性值 -->
+				<param name="namespace">/atguigu</param>
+			</result>
+
+		</action>
+		
+		<!-- <action name="saveBook">
+			<result>/result.jsp</result>
+		</action> -->
+
+	</package>
+
+	<package name="myPackage" namespace="/atguigu" extends="struts-default">
+
+		<!-- 目标action -->
+		<!-- URL地址：/atguigu/targetAction.action -->
+		<action name="targetAction" class="com.atguigu.resulttype.action.TargetAction">
+			<result>/resultOfTargetAction.jsp</result>
+		</action>
+		
+		<!-- <action name="saveBook">
+			<result>/result.jsp</result>
+		</action> -->
+
+	</package>
+
+</struts>

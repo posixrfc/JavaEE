@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- 配置国际化资源文件的基名 -->
+    <constant name="struts.custom.i18n.resources" value="MyI18N"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+
+		<action name="I18NAction" class="com.atguigu.i18n.action.I18NAction">
+			<result>/result.jsp</result>
+		</action>
+		
+		<!-- 由于只要经过拦截器即可，所以可以使用class属性的默认值访问ActionSupport类 -->
+		<action name="toLoginPage">
+			<result>/login.jsp</result>
+		</action>
+        
+    </package>
+
+</struts>

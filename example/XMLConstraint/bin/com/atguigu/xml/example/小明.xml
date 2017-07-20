@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servlet-info>
+	<servlet-full-class>com.atguigu.servlet.StudentServlet</servlet-full-class>
+	<servlet-name>StudentServlet</servlet-name>
+	<urlPattern>/StudentServlet</urlPattern>
+</servlet-info>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    
+    	<property name="hibernate.connection.username">root</property>
+    	<property name="hibernate.connection.password">root</property>
+    	<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate0607</property>
+    	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    	
+    	<property name="hibernate.show_sql">true</property>
+    	<property name="hibernate.format_sql">true</property>
+    	<property name="hibernate.hbm2ddl.auto">update</property>
+    	<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    	
+	  	<!-- c3p0相关的配置 -->
+	  	<property name="hibernate.c3p0.acquire_increment">2</property>
+	  	<property name="hibernate.c3p0.max_size">100</property>
+	  	<property name="hibernate.c3p0.max_statements">10</property>
+	  	<property name="hibernate.c3p0.min_size">5</property>
+	  	
+	  	<!-- timeout表示数据库连接在空闲多少秒之后超时，可以被释放 -->
+	  	<property name="hibernate.c3p0.timeout">500</property>
+	  	
+	  	<!-- idle_test_period作用是：数据库连接对象自己并不会释放自己，
+	  	需要另外有一个守护进程每隔idle_test_period秒检查一次，看当前数据库连接池中有多少可以释放的连接，
+	  	发现可以释放的就执行释放操作 -->
+	  	<property name="hibernate.c3p0.idle_test_period">3000</property>
+	  	
+    	<mapping resource="com/atguigu/hello/bean/Student.hbm.xml"/>
+    
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+		
+		<interceptors>
+			<!-- 注册自定义拦截器类 -->
+		    <interceptor name="myUserName" class="com.atguigu.inter.inter.MyInterceptor"/>
+		    <!-- 自定义拦截器栈 -->
+		    <interceptor-stack name="myStack">
+		    	<!-- 引用自定义拦截器 -->
+				<interceptor-ref name="myUserName">
+					<param name="subject">Struts2</param>
+				</interceptor-ref>
+		    	<!-- 引用默认拦截器栈 -->
+		    	<interceptor-ref name="defaultStack"/>
+		    </interceptor-stack>
+		</interceptors>
+		
+		<!-- 设置当前拦截器栈 -->
+		<default-interceptor-ref name="myStack"/>
+		
+		<action name="login"
+				class="com.atguigu.inter.action.LoginAction">
+			
+				<!-- 在action级别引用自定义拦截器 -->	
+				<!-- <interceptor-ref name="myUserName"/>
+				<interceptor-ref name="defaultStack"/> -->
+			
+			<result>/result.jsp</result>
+			
+			<result name="input">/index.jsp</result>
+		</action>
+        
+        <action name="regist"
+        		class="com.atguigu.inter.action.LoginAction">
+        	<result>/result.jsp</result>
+			<result name="input">/index.jsp</result>		
+        </action>
+        
+    </package>
+
+</struts>

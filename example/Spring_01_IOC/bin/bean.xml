@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 实验14：给bean的级联属性赋值 -->
+	<!-- 级联属性：bookService.bookDao.daoMsg -->
+	<!-- 注意：与Struts2不同，级联属性中涉及到的所有对象都必须配置对应的bean才行，而Struts2中是可以自动创建对象的 -->
+	<bean id="bookService" class="com.atguigu.ioc.component.BookService">
+		<property name="bookDao" ref="bookDao"/>
+		<property name="bookDao.daoMsg" value="HappyMsg"/>
+	</bean>
+	<bean id="bookDao" class="com.atguigu.ioc.component.BookDao"/>
+
+	<!-- 实验13：通过util名称空间创建集合类型的bean -->
+	<util:list id="myList">
+		<value>AAA</value>
+		<value>KKK</value>
+		<value>QQQ</value>
+		<value>JJJ</value>
+	</util:list>
+
+	<!-- 实验8：引用其他bean★ -->
+	<bean id="bookShop" class="com.atguigu.ioc.bean.BookShop">
+		<property name="specialBook" ref="book04"/>
+		<property name="innerBook">
+			<!-- 实验9：引用内部bean -->
+			<!-- 配置一个内部bean，给innerBook赋值 -->
+			<!-- 内部bean不能在外部引用 -->
+			<bean id="myInnerBook" class="com.atguigu.ioc.bean.Book" 
+				p:author="吴承恩"
+				p:bookName="西游记"
+				p:price="400.00"
+				p:isbn="ISBN0005"
+			/>
+		</property>
+		<!-- 实验10：使用List类型的集合属性 -->
+		<property name="bookList">
+			<!-- 给list属性赋值 -->
+			<list>
+				<ref bean="book"/>
+				<ref bean="book02"/>
+				<ref bean="book03"/>
+				<ref bean="book04"/>
+				<ref bean="book05"/>
+			</list>
+		</property>
+		<!-- 实验11：使用Map类型的集合属性 -->
+		<property name="bookMap">
+			<map>
+				<entry>
+					<key>
+						<value>key01</value>
+					</key>
+					<ref bean="book02"/>
+				</entry>
+				<entry>
+					<key>
+						<value>key02</value>
+					</key>
+					<ref bean="book03"/>
+				</entry>
+				<entry>
+					<key>
+						<value>key03</value>
+					</key>
+					<ref bean="book04"/>
+				</entry>
+			</map>
+		</property>
+		<!-- 实验12：使用prop子元素为Properties类型的属性赋值 -->
+		<property name="prop">
+			<props>
+				<prop key="propKey01">val01</prop>
+				<prop key="propKey02">val02</prop>
+				<prop key="propKey03">val03</prop>
+				<prop key="propKey04">val04</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 实验7：测试使用null值 -->
+	<bean id="book07" class="com.atguigu.ioc.bean.Book">
+		<!-- 使用property标签设置对象的属性 -->
+		<!-- name属性：指定对象的属性名 -->
+		<!-- value属性：设置对象的属性值 -->
+		<property name="author" value="罗贯中"/>
+		<property name="bookName">
+			<null/>
+		</property>
+		<!-- <property name="isbn" value="ISBN0001"/> -->
+		<property name="price" value="100.00"/>
+	</bean>
+
+	<!-- 实验6：通过p名称空间为bean赋值 -->
+	<!-- 使用p名称空间引用实体类的属性，直接赋值 -->
+	<bean id="book06" class="com.atguigu.ioc.bean.Book"
+		p:bookName="红楼梦"
+		p:author="曹雪芹"
+		p:price="300.00"
+		p:isbn="ISBN0004"
+	/>
+
+	<!-- 实验5：通过类型不同区分重载的构造器 -->
+	<bean id="book05" class="com.atguigu.ioc.bean.Book">
+		<constructor-arg index="1" value="施耐庵"/>
+		<constructor-arg index="0" value="水浒传"/>
+		<!-- 通过type属性指定当前value属性的值赋给什么类型的参数 -->
+		<constructor-arg value="ISBN0002" type="java.lang.String"/>
+		<constructor-arg value="200.00" type="double"/>
+	</bean>
+
+	<!-- 实验4：通过index属性指定参数的位置 -->
+	<bean id="book04" class="com.atguigu.ioc.bean.Book">
+		
+		<!-- 按照有参的构造器创建对象首先要保证类中确实有对应的构造器 -->
+		<!-- String bookName, String author, double price, String isbn -->
+		<constructor-arg index="1" value="施耐庵"/>
+		<constructor-arg index="0" value="水浒传"/>
+		<constructor-arg value="200.00"/>
+		<constructor-arg value="ISBN0002"/>
+	
+	</bean>
+
+	<!-- 实验3：通过构造器为bean的属性赋值 -->
+	<bean id="book03" class="com.atguigu.ioc.bean.Book">
+		
+		<!-- 按照有参的构造器创建对象首先要保证类中确实有对应的构造器 -->
+		<!-- String bookName, String author, double price, String isbn -->
+		<constructor-arg value="施耐庵"/>
+		<constructor-arg value="水浒传"/>
+		<constructor-arg value="200.00"/>
+		<constructor-arg value="ISBN0002"/>
+	
+	</bean>
+
+	<!-- 实验1：通过IOC容器创建对象，并为属性赋值★ -->
+	<!-- 使用bean标签配置需要IOC容器创建的对象 -->
+	<!-- class属性：指定目标对象的全类名 -->
+	<!-- id属性：指定一个可以引用IOC容器创建的对象的名称 -->
+	<bean id="book" class="com.atguigu.ioc.bean.Book">
+		<!-- 使用property标签设置对象的属性 -->
+		<!-- name属性：指定对象的属性名 -->
+		<!-- value属性：设置对象的属性值 -->
+		<property name="author" value="罗贯中"/>
+		<property name="bookName" value="三国演义"/>
+		<property name="isbn" value="ISBN0001"/>
+		<property name="price" value="100.00"/>
+	</bean>
+	
+	<bean id="book02" class="com.atguigu.ioc.bean.Book">
+		<!-- 使用property标签设置对象的属性 -->
+		<!-- name属性：指定对象的属性名 -->
+		<!-- value属性：设置对象的属性值 -->
+		<property name="author" value="罗贯中"/>
+		<property name="bookName" value="三国演义"/>
+		<property name="isbn" value="ISBN0001"/>
+		<property name="price" value="100.00"/>
+	</bean>
+
+</beans>

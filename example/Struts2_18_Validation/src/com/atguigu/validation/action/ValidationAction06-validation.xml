@@ -1,0 +1,12 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="idcard">
+		<!-- 自定义验证器类注册之后使用方式和Struts2内置的验证规则是一样的 -->
+		<field-validator type="idCard">
+			<message>身份证号格式不正确</message>
+		</field-validator>
+	</field>
+</validators>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<书架 xmlns="http://www.atguigu.com" 
+	xmlns:fengjie="http://www.w3.org/2001/XMLSchema-instance"
+	fengjie:schemaLocation="http://www.atguigu.com book.xsd">
+	<书>
+		<书名>JavaScript开发</书名>
+		<作者>老佟</作者>
+		<售价>28.00</售价>
+	</书>
+</书架>

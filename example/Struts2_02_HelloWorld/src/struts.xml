@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- constant用于设置Struts2内置的常量的值 -->
+	<!-- struts.enable.DynamicMethodInvocation负责设置Struts2“动态方法调用”功能是否开启，默认是false不开启 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- struts.devMode负责设置是否开启Struts2“开发者模式”功能，开启后将由Struts2负责显示错误消息，好处是404错误时可以有错误提示 -->
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- 
+    1.package标签
+    	①作用：用于将Struts2请求的配置组织到一起。
+    	②属性
+    		[1]name：用于给当前package起一个名字，方便其他package引用。
+    		[2]namespace
+    		[3]extends：用于指定当前package所继承的父package。默认需要继承：struts-default
+    			原因是：struts-default包中定义了很多Struts2的核心功能，如果不继承，则很多重要功能都不起作用。
+    2.action标签
+    	①作用：配置Struts2请求
+    	②属性
+    		[1]name：给action起一个名字，页面上的URL地址可以根据action的名字来访问action。
+    		[2]class：用于指定处理当前请求的Action类的全类名，默认值是com.opensymphony.xwork2.ActionSupport
+    		[3]method：用于指定处理当前请求的Action方法的方法名，默认值是execute
+    3.result标签
+    	①作用：配置Struts2请求处理完成之后，要前往的页面。
+    	②属性
+    		[1]name：给当前result起一个名字，用于Action方法通过它的返回值字符串来进行匹配，默认值是success
+     -->
+    <package name="default" namespace="/" extends="struts-default">
+		
+		<!-- /saveUI.action -->
+		<!-- 省略了默认值的简化配置方式 -->
+		<!-- <action name="saveUI">
+			<result>/saveUI.jsp</result>
+		</action> -->
+		
+		<!-- 不省略默认值的完整配置形式 -->
+		<action name="saveUI" 
+				class="com.opensymphony.xwork2.ActionSupport"
+				method="execute">
+			<result name="success">/saveUI.jsp</result>
+		</action>
+		
+		<!-- /saveBook.action -->
+		<action name="saveBook" 
+		
+				class="com.atguigu.helloworld.bean.Book"
+				
+				method="save">
+				
+			<result name="saveSuccess">/detail.jsp</result>
+			
+			<result name="updateSuccess">/detail.jsp</result>
+			<result name="delSuccess">/detail.jsp</result>
+			<result name="querySuccess">/detail.jsp</result>
+		</action>
+		
+    </package>
+
+	<!-- 将其他配置文件包含进来，方便在项目功能复杂的情况下，把配置信息分散到多个配置文件中，简化具体XML文档中的配置 -->
+    <!-- <include file="example.xml"/> -->
+
+	<!-- package可以写多个 -->
+    <!-- Add packages here -->
+
+</struts>

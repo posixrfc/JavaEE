@@ -1,0 +1,17 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+
+	<!-- 使用“表达式”规则定义非字段验证的判断条件 -->
+	<validator type="expression">
+		<!-- 使用expression参数传入验证表达式 -->
+		<!-- 由于表达式语句很可能包含<或>等XML文档中有特定含义的符号，所以表达式应该放在CDATA节中 -->
+		<param name="expression">
+			<![CDATA[userPwd == userPwdAgain]]>
+		</param>
+		<message>密码和确认密码必须一致</message>
+	</validator>
+
+</validators>

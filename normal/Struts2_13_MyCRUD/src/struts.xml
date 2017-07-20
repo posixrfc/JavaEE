@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+
+		<action name="showList" 
+				class="com.atguigu.CRUD.action.BookAction"
+				method="showList">
+			<result>/showList.jsp</result>
+		</action>
+		
+		<action name="saveBook"
+				class="com.atguigu.CRUD.action.BookAction"
+				method="saveBook">
+			<!-- 重定向到showList.action -->
+			<!-- <result type="redirect">/showList.action</result> -->		
+			<result type="redirectAction">showList</result>		
+		</action>
+		
+		<action name="deleteBook"
+				class="com.atguigu.CRUD.action.BookAction"
+				method="deleteBook">
+			<result type="redirectAction">showList</result>		
+		</action>
+		
+		<action name="editBook"
+				class="com.atguigu.CRUD.action.BookAction"
+				method="editBook">
+			<result>/editUI.jsp</result>		
+		</action>
+		
+		<action name="updateBook"
+				class="com.atguigu.CRUD.action.BookAction"
+				method="updateBook">
+			<result type="redirectAction">showList</result>		
+		</action>
+        
+    </package>
+
+</struts>

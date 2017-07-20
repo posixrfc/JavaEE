@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	var wuDa = {
+		name : "武大",
+		showName : function (wife){
+			console.log(this.name + "和" + wife);
+		}
+	};
+	
+	var xiMen = {
+		name : "西门"
+	};
+	
+	//apply()和call()的区别是：apply()要求以数组的形式，给函数传入参数
+	wuDa.showName("潘金莲");
+	wuDa.showName.apply(xiMen, ['小潘潘']);
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

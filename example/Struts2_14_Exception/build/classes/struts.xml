@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+    	
+    	<!-- Convention over configuration -->
+    	
+    	<!-- 配置全局级别的result -->
+    	<global-results>
+    		<result name="global-err">/globalMsg.jsp</result>
+    	</global-results>
+    
+    	<!-- 配置package级别的异常映射信息 -->
+    	<global-exception-mappings>
+    		<!-- 将异常类型映射到一个package级别的result上面 -->
+    		<exception-mapping result="global-err" exception="java.lang.ArithmeticException"/>
+    	</global-exception-mappings>
+
+		<action name="daoDanAction"
+				class="com.atguigu.exception.action.ExceptionAction"
+				method="daoDanAction">
+			<!-- 配置Action级别的异常映射信息，将一个异常类型映射到一个指定的result -->
+			<!-- Struts2在捕获到指定的异常后，会执行指定的result，并将com.opensymphony.xwork2.interceptor.ExceptionHolder对象压入栈顶 -->
+			<exception-mapping result="err" exception="java.lang.ArithmeticException"/>
+			<result>/good.jsp</result>
+			<result name="err">/makeException.jsp</result>
+		</action>
+		
+		<action name="daoMeiAction"
+				class="com.atguigu.exception.action.ExceptionAction"
+				method="daoMeiAction">
+			<result>/good.jsp</result>
+		</action>
+        
+    </package>
+
+</struts>

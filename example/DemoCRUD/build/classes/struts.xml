@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="paramsPrepareParamsStack">
+					<param name="prepare.alwaysInvokePrepare">false</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack" />
+		<!-- <default-interceptor-ref name="paramsPrepareParamsStack" /> -->
+
+		<action name="*" class="com.atguigu.CRUD.action.BookAction"
+			method="{1}">
+			<result name="{1}-success" type="chain">
+				<param name="actionName">showList</param>
+			</result>
+			<result name="showList">/showList.jsp</result>
+			<result name="editUI">/editUI.jsp</result>
+		</action>
+
+	</package>
+
+</struts>

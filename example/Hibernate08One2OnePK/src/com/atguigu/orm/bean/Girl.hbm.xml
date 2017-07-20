@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-8-31 10:33:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.atguigu.orm.bean">
+    <class name="Girl" table="GIRLS">
+		<id name="girlId" type="java.lang.Integer">
+		    <column name="GIRL_ID" />
+		    <!-- 主键依赖Boy生成 -->
+			<generator class="foreign">
+			<!-- 指定根据当前类中的哪个属性作为生成主键值的依据 -->
+		    	<param name="property">boy</param>
+		    </generator>
+		</id>
+        <property name="girlName" type="java.lang.String">
+            <column name="GIRL_NAME" />
+        </property>
+		<!-- 映射“一对一”关联关系，通过指定constrained="true"给主键列上面添加外键约束 -->
+		<one-to-one name="boy" class="Boy" constrained="true"/>
+    </class>
+</hibernate-mapping>
