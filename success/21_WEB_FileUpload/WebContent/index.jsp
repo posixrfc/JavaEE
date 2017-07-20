@@ -9,6 +9,6 @@
 <body>
 <h3 style="color: red">${msg}</h3>
 <h1>上传文件</h1>
-<form action="UploadServlet" method="post" enctype="multipart/form-data"><input type="text" name="username"/><input type="file" name="photo1"/><input type="file" name="photo2"/><input type="submit" value="提交"/></form>
+<form action="UploadServlet" method="post" enctype="multipart/form-data"><input type="text" name="username"/><input type="file" name="photo1"/><input type="submit" value="提交"/></form>
 </body>
 </html>

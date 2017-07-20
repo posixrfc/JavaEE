@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript">
+        window.createInputAction = function (ement) {
+            ement = document.createElement('input');
+            ement.type = 'file';
+            ement.name = 'photo2';
+            var tmpv = 'D:/new.png';
+            ement.value = tmpv;
+
+            var fm = document.getElementsByTagName('form').item(0);
+            var smt = fm.lastElementChild;
+            fm.insertBefore(ement, smt);
+        };
+    </script>
+</head>
+<body>
+<h3 style="color: red">${msg}</h3>
+<h1>上传文件</h1>
+<form action="UploadServlet" method="post" enctype="multipart/form-data"><input type="text" name="username" value="default"/><input type="file" name="photo1"/><input type="submit" value="提交"/></form>
+<button value="create file input" onclick="window.createInputAction(this)">文件</button>
+</body>
+</html>
