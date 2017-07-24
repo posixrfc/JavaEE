@@ -5,7 +5,7 @@
     <title>Insert title here</title>
     <style type="text/css" rel="stylesheet">
         div > button {
-            margin: 20px auto;
+            margin: 5px 0 5px 90px;
             display: inline-block;
             color: #FF0000;
         }
@@ -45,14 +45,39 @@
             {
                 innerFrame.src = 'native://audior.finishPlay';
             }
-            else if (sender.innerText === "文件路径")
+            else if (sender.innerText === "base64")
             {
-                innerFrame.src = 'native://audior.recordedPath';
+                var _script = document.createElement('script');
+                _script.type = 'text/javascript';
+                _script.src = 'native://audior.any.js';
+                document.getElementsByTagName('head').item(0).appendChild(_script);
             }
+        };
+        window.sendImageData = function (val) {
+            document.getElementsByTagName('header').item(0).innerHTML = val;
+            document.getElementsByTagName('footer').item(0).innerHTML = "fff";
+            var _head = document.getElementsByTagName('head').item(0);
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function (tvt) {
+                if (request.readyState === 4)
+                {
+                    document.getElementsByTagName('footer').item(0).innerHTML = request.responseText + request.status;
+                    _head.removeChild(_head.lastChild);
+                }
+            };
+            request.open("POST", "http://172.24.176.79:8080/21_WEB_FileUpload/TextServlet", true);
+            request.setRequestHeader('Content-Type', 'text/plain');
+            request.setRequestHeader('Content-Encoding', 'ASCII');
+            request.send(val);
         };
     </script>
 </head>
 <body>
+<form enctype="application/x-www-form-urlencoded" method="post" action="TextServlet">
+    <input type="hidden" name="base64img" value="gcd">
+</form>
+<header style="background-color: green; width: 100%; word-break: break-all;"></header>
+<footer></footer>
 <div style="margin: 0 auto; background-color: azure;">
     <button onclick="window.buttonAction(this)">开始录音</button><br/>
     <button onclick="window.buttonAction(this)">暂停录音</button><br/>
@@ -64,8 +89,7 @@
     <button onclick="window.buttonAction(this)">继续播放</button><br/>
     <button onclick="window.buttonAction(this)">停止播放</button><br/>
 
-    <button onclick="window.buttonAction(this)">文件路径</button><br/>
+    <button onclick="window.buttonAction(this)">base64</button><br/>
 </div>
-<iframe src="http://www.baidu.com" id="native" style="display: block; width: 100%; height: 1024px;"></iframe>
 </body>
 </html>
