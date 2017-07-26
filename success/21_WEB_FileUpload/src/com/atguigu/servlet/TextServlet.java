@@ -1,6 +1,7 @@
 package com.atguigu.servlet;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -23,12 +24,19 @@ public class TextServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		BufferedReader bReader = request.getReader();
-		String line = bReader.readLine();
-		while (null != line)
-		{
-			System.err.println(line);
-			line = bReader.readLine();
+		StringBuilder sb = new StringBuilder();
+		char[] chr = new char[1024];
+		int len = -1;
+		while ((len = bReader.read(chr)) != -1) {
+			sb.append(chr, 0, len);
 		}
+		System.err.println(sb.toString());
+//		String line = bReader.readLine();
+//		while (null != line)
+//		{
+//			System.err.println(line);
+//			line = bReader.readLine();
+//		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

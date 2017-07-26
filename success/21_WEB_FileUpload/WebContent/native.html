@@ -5,91 +5,107 @@
     <title>Insert title here</title>
     <style type="text/css" rel="stylesheet">
         div > button {
-            margin: 5px 0 5px 90px;
+            margin: 5px 0 15px 90px;
             display: inline-block;
             color: #FF0000;
         }
     </style>
     <script type="text/javascript">
         window.buttonAction = function (sender) {
-            var innerFrame = document.getElementById('native');
             if (sender.innerText === "开始录音")
             {
-                innerFrame.src = 'native://audior.startRecord';
+                window.recordHandler = window.audior.startRecord();
+                window.console.log("开始录音:" + window.recordHandler);
             }
             else if (sender.innerText === "暂停录音")
             {
-                innerFrame.src = 'native://audior.pauseRecord';
+                window.audior.pauseRecord('window.recordHandler');
             }
             else if (sender.innerText === "继续录音")
             {
-            	innerFrame.src = 'native://audior.resumeRecord';
+                window.audior.resumeRecord('window.recordHandler');
+            }
+            else if (sender.innerText === "取消录音")
+            {
+                window.audior.cancelRecord(window.recordHandler);
             }
             else if (sender.innerText === "结束录音")
             {
-                innerFrame.src = 'native://audior.finishRecord';
+                var base64 = window.audior.finishRecord(window.recordHandler);
+                window.sendImageData(base64);
+            }
+            else if (sender.innerText === "删除录音")
+            {
+                window.audior.deleteRecord(window.recordHandler);
             }
             else if (sender.innerText === "开始播放")
             {
-                innerFrame.src = 'native://audior.startPlay';
+                window.audior.startPlay(window.recordHandler);
             }
             else if (sender.innerText === "暂停播放")
             {
-                innerFrame.src = 'native://audior.pausePlay';
+                window.audior.pausePlay(window.recordHandler);
             }
             else if (sender.innerText === "继续播放")
             {
-                innerFrame.src = 'native://audior.resumePlay';
+                window.audior.resumePlay(window.recordHandler);
             }
             else if (sender.innerText === "停止播放")
             {
-                innerFrame.src = 'native://audior.finishPlay';
-            }
-            else if (sender.innerText === "base64")
-            {
-                var _script = document.createElement('script');
-                _script.type = 'text/javascript';
-                _script.src = 'native://audior.any.js';
-                document.getElementsByTagName('head').item(0).appendChild(_script);
+                window.audior.finishPlay(window.recordHandler);
             }
         };
         window.sendImageData = function (val) {
+            if (val === null)
+            {
+                document.getElementsByTagName('header').item(0).innerHTML = 'NULL';
+                return;
+            }
             document.getElementsByTagName('header').item(0).innerHTML = val;
             document.getElementsByTagName('footer').item(0).innerHTML = "fff";
-            var _head = document.getElementsByTagName('head').item(0);
             var request = new XMLHttpRequest();
             request.onreadystatechange = function (tvt) {
                 if (request.readyState === 4)
                 {
+                    var _head = document.getElementsByTagName('head').item(0);
                     document.getElementsByTagName('footer').item(0).innerHTML = request.responseText + request.status;
                     _head.removeChild(_head.lastChild);
                 }
             };
-            request.open("POST", "http://172.24.176.79:8080/21_WEB_FileUpload/TextServlet", true);
+            request.open('POST', 'http://172.24.176.79:8080/21_WEB_FileUpload/TextServlet', true);
+//            request.open('POST', 'http://2a9b2fad.ngrok.io/21_WEB_FileUpload/TextServlet', true);
             request.setRequestHeader('Content-Type', 'text/plain');
             request.setRequestHeader('Content-Encoding', 'ASCII');
             request.send(val);
         };
+        //protected String startRecord()                    开始录音            var recordHandler = window.audior.startRecord();
+        //protected String pauseRecord(String fileName)     暂停录音，暂不支持  window.audior.pauseRecord(recordHandler);
+        //protected String resumeRecord(String fileName)    继续录音，暂不支持  window.audior.resumeRecord(recordHandler);
+        //protected String cancelRecord(String fileName)    取消录音            window.audior.cancelRecord(recordHandler);
+        //protected String finishRecord(String fileName)    结束录音            var base64 = window.audior.finishRecord(recordHandler);
+        //protected String deleteRecord(String fileName)    删除录音            window.audior.deleteRecord(recordHandler);
+
+        //protected String startPlay(String fileName)       开始播放            window.audior.startPlay(recordHandler);
+        //protected String pausePlay(String fileName)       暂停播放            window.audior.pausePlay(recordHandler);
+        //protected String resumePlay(String fileName)      继续播放            window.audior.resumePlay(recordHandler);
+        //protected String finishPlay(String fileName)      结束播放            window.audior.finishPlay(recordHandler);
     </script>
 </head>
 <body>
-<form enctype="application/x-www-form-urlencoded" method="post" action="TextServlet">
-    <input type="hidden" name="base64img" value="gcd">
-</form>
 <header style="background-color: green; width: 100%; word-break: break-all;"></header>
 <footer></footer>
 <div style="margin: 0 auto; background-color: azure;">
     <button onclick="window.buttonAction(this)">开始录音</button><br/>
     <button onclick="window.buttonAction(this)">暂停录音</button><br/>
     <button onclick="window.buttonAction(this)">继续录音</button><br/>
+    <button onclick="window.buttonAction(this)">取消录音</button><br/>
     <button onclick="window.buttonAction(this)">结束录音</button><br/>
+    <button onclick="window.buttonAction(this)">删除录音</button><br/>
 
     <button onclick="window.buttonAction(this)">开始播放</button><br/>
     <button onclick="window.buttonAction(this)">暂停播放</button><br/>
     <button onclick="window.buttonAction(this)">继续播放</button><br/>
     <button onclick="window.buttonAction(this)">停止播放</button><br/>
-
-    <button onclick="window.buttonAction(this)">base64</button><br/>
 </div>
 </body>
 </html>
